@@ -1,0 +1,73 @@
+<div class="container">
+    
+
+  <div class="omb_login">
+    <h3 class="omb_authTitle"> <a routerLink='/ChatLogin'>Login</a></h3>
+  
+
+  <div class="row omb_row-sm-offset-3 omb_loginOr">
+    <div class="col-xs-12 col-sm-6">
+      <hr class="omb_hrOr">
+      <span class="omb_spanOr">or</span>
+    </div>
+  </div>
+
+  <div class="row omb_row-sm-offset-3">
+      
+    <div class="col-xs-12 col-sm-6">	
+        <span  *ngIf="showDialogeBox"  style="margin-top: 5px; color: red">
+            <strong style="font-size: 13px;">you already have an account so Please login!!</strong>
+  </span><br><br>
+        <form class="omb_loginForm" #Signupform="ngForm" (ngSubmit)="register(Signupform)">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+            <input type="text" name="Name" #Name="ngModel" ngModel class="form-control" placeholder="Enter Your Name" required>
+          </div>
+          <span class="help-block" style="color: red;" *ngIf="Name.errors?.required && Name.touched">
+            Name is required!! 
+     </span>
+                    <span class="help-block" ></span>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+            <input type="text" name="userName" #userName="ngModel" pattern="^[a-z\d\.]{5,}$" ngModel class="form-control" placeholder="Enter User Name" required>
+          </div>
+          <span style="color: red;" *ngIf="userName.errors?.required && userName.touched">
+            Username is required!!
+     </span>
+         <span style="color: red;" *ngIf="userName.errors?.pattern && userName.touched">
+                Should be in small letter and without space!!
+         </span>
+         <span class="help-block"></span>
+          <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+          <input type="text" class="form-control" name="email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" ngModel placeholder="Enter Your Email" required>
+           
+        </div>
+        <span class="help-block" style="color:red;" *ngIf="email.errors?.required && email.touched">
+          Email is required!!
+   </span> 
+       <span class="help-block" style="color: red;" *ngIf="email.errors?.pattern && email.touched">
+              Email is incorrect!!
+       </span>
+        <span class="help-block"></span>
+                  
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+          <input  type="password" class="form-control" name="password" #password="ngModel" ngModel placeholder="Enter Your Password" required>
+          
+        </div>
+        <span class="help-block" style="color: red;" *ngIf="password.errors?.required && password.touched">
+          Password is required!! 
+   </span>
+                  <span class="help-block" ></span>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="Signupform.invalid">Register</button>
+      </form>
+    </div>
+    </div>
+</div>
+
+
+
+      </div>
+      

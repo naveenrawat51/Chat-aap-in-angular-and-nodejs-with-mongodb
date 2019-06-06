@@ -1,0 +1,101 @@
+<nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" >Chat-App</a>
+          </div>
+         
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>Welcome: {{Name}}</a></li>
+            <li><a style="cursor: pointer;" (click)="logoutUser()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+          </ul>
+        </div>
+      </nav>
+      
+      <div class="container-fluid name-room">
+            <div class="row">
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <label for="username">Name</label>
+                    <input type="text" [(ngModel)]="Name" class="form-control" id="username" placeholder="Enter username" disabled>
+                 </div>
+            </div>
+            <div class="col-sm-5">
+                <label for="roomInput">Choose room</label>
+                <select name="roomInput" [(ngModel)]="room" id="roomInput" class="form-control" >
+                    <option value="Email Marketing">Email Marketing</option>
+                    <option value="Dsv & Preview">Dsv & Preview</option>
+                    <option value="Creative">Creative</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <div style="margin-top:19px;" class="pull-right"> 
+                    
+                    <button *ngIf="!showJoin" type="button" class="btn btn-success" (click)="join()" >Join Room</button>
+                
+                    <button *ngIf="showJoin" type="button" class="btn btn-danger" (click)="leave()">Leave Room</button>
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+      <div class="container-fluid name-room">
+            <div class="row">
+              <div class="col-sm-3 col-xs-12">
+                <div class="col-inside-lg decor-default chat" style="overflow: hidden; outline: none;" tabindex="5000">
+                  <div class="chat-users">
+                    <h6>Online</h6>
+                                     
+                      
+                      <div class="user" *ngFor="let online of AllUsersOnline">
+                          <div class="avatar">
+                          <div class="status online"></div>
+                          </div>
+                          <div class="name" >{{online.user}}</div>
+                          <!--<div class="mood">User mood</div>-->
+                    </div>
+                      
+                      
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-9 col-xs-12 chat" style="overflow: hidden; outline: none;" tabindex="5001">
+                <div class="col-inside-lg decor-default">
+                  <div class="chat-body">
+                    <h6>Mini Chat</h6>
+                  <div #list class="list" [scrollTop]="list.scrollHeight">
+                    <div [ngClass]="(chat.Name === Name)? 'left' : 'right'" class="answer " *ngFor="let chat of historyMessages">
+                      <div class="avatar">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User name">
+                        <div class="status offline"></div>
+                      </div>
+                      <div class="name">{{chat.Name}}</div>
+                      <div class="text">
+                            {{chat.message}}
+                      </div>
+                      <div class="time">{{chat.date | date: 'mediumDate'}} {{chat.time}}</div>
+                    </div>
+                    <div [ngClass]="(item.user === Name)? 'left' : 'right'"  class="answer" *ngFor="let item of messageArray">
+                            <div class="avatar">
+                              <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User name">
+                              <div class="status offline"></div>
+                            </div>
+                            <div class="name">{{item.user}}</div>
+                            <div class="text">
+                                    {{item.message}}
+                            </div>
+                            <div class="time">{{item.time}}</div>
+                    </div>
+                    </div>
+                    <p *ngIf="showTypingPara"><strong>{{typingShow.user}}</strong> {{typingShow.message}}</p>
+                    <div class="answer-add">
+                    <input type="text" class="form-control" [(ngModel)]="messageText"  (keyup)="showTyping($event)" placeholder="Write a message">
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
